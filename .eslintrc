@@ -29,7 +29,6 @@
         "multiline-ternary": ["error", "always"],
         "key-spacing": ["error", { "mode": "strict" }],
         "arrow-parens": ["error", "always"],
-        "func-style": ["error", "declaration"],
         "react/jsx-wrap-multilines": "error",
         "prefer-const": "error",
         "no-debugger": "error"

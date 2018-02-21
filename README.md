@@ -10,7 +10,6 @@ For development this project uses `dotenv` to allow you tp specify environment v
 ### Back End
 
 
-
 ## Usage
 
 Utilize the scripts below to use the application:

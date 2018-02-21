@@ -6,10 +6,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install NPM dependencies
+          name: Install NPM Dependencies
           command: npm install
       - run:
-          name: Test
+          name: Run Project Tests
           command: npm test
   dev-deploy:
     docker:
@@ -17,35 +17,19 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install NPM dependencies
+          name: Install NPM Dependencies
           command: npm install
       - run:
-          name: Build React client
-          command: npm run client-prod
+          name: Update Google Cloud SDK Components
+          command: gcloud --quiet components update
       - run:
-          name: Build MJML email templates
-          command: npm run email-prod
+          name: Add CircleCI Google Service Account Credentials
+          command: echo ${GCLOUD_SERVICE_KEY} | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
       - run:
-          name: Create .env file
-          command: |
-            echo "AUTH_SECRET=${AUTH_SECRET}" > .env
-            echo "MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE}" >> .env
-            echo "MONGO_DBNAME=${MONGO_DBNAME}" >> .env
-            echo "MONGO_HOST=${MONGO_HOST}" >> .env
-            echo "MONGO_PASS=${MONGO_PASS}" >> .env
-            echo "MONGO_USER=${MONGO_USER}" >> .env
-            echo "SENDGRID_API_KEY=${SENDGRID_API_KEY}" >> .env
-            echo "EMAIL_URL_HOST=${EMAIL_URL_HOST}" >> .env
-            echo "SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}" >> .env
-            echo "FORCE_SSL=${FORCE_SSL}" >> .env
+          name: Add Google Service Account Credentials to GCloud SDK
+          command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
       - run:
-          name: Dump Google Cloud Credentials to file
-          command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-      - run:
-          name: Add Google Cloud Service Account credentials to GCloud SDK
-          command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-      - run:
-          name: Set GCloud project
+          name: Set GCloud SDK Project
           command: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - deploy:
           name: Deploy to Google App Engine
