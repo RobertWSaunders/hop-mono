@@ -10,11 +10,8 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// const sequelize = new Sequelize('hop_stage_database', 'username', 'password', {
-//   dialect: 'postgres',
-//   host: 'my.server.tld'
-// });
 //
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
@@ -38,6 +35,6 @@ const app = express();
 // const webpackConfig = require('../webpack.config.js');
 // app.use(webpackMiddleware(webpack(webpackConfig)));
 
-app.listen(4000, () => {
+app.listen(port, () => {
   console.log('Listening');
 });
