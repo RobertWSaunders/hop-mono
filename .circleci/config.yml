@@ -20,6 +20,10 @@ jobs:
           name: Install NPM Dependencies
           command: npm install
       - run:
+          name: Build Enviroment Variable File
+          command: |
+            echo "AUTH_SECRET=${AUTH_SECRET}" > .env
+      - run:
           name: Update Google Cloud SDK Components
           command: gcloud --quiet components update
       - run:
