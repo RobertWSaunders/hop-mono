@@ -7,6 +7,11 @@ For development this project uses `dotenv` to allow you tp specify environment v
 
 > NOTE: You will need to create a .env file at the root your project with the desired environment variables that are outlined below. You can check out example.env in the project root to see a standard configuration.
 
+sequelize-cli needed
+psql - postgres
+http://postgresguide.com/utilities/psql.html
+
+
 ### Back End
 
 

@@ -1,16 +1,35 @@
 require('dotenv').config();
+const expressGraphQL = require('express-graphql');
+const compression = require('compression');
+const schema = require('./schema/schema');
+const bodyParser = require('body-parser');
+const logger = require('./utils/logger');
+const db = require('./db')(logger);
 const express = require('express');
-const models = require('./models');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-models.sequelize.sync().then(() => {
-	console.log('Database is connected and is looking good!');
+const BUNDLE_DIR = path.join(__dirname, '../client/bundle');
+
+db.sequelize.sync().then(() => {
+	logger.info('Database has synchronized successfully!');
 }).catch((err) => {
-	console.log(err, 'Something went wrong with the database update!');
+	logger.error('Something went wrong with the database synchronization!', err);
 });
 
+app.use(compression());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/graphql', expressGraphQL({
+  schema,
+  graphiql: true
+}));
+
+app.use(express.static(BUNDLE_DIR));
+
 app.listen(port, () => {
-	console.log('Server is running and is listening!');
+	logger.info('Server is running and is listening!');
 });

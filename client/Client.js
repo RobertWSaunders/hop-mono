@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Root = () => {
+const Client = () => {
 	return (
 		<div>
 			Hello Hop!
@@ -9,4 +9,4 @@ const Root = () => {
 	);
 };
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<Client />, document.querySelector('#root'));

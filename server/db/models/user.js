@@ -1,19 +1,18 @@
-module.exports = function(sequelize, Sequelize) {
+module.exports = function(sequelize, DataTypes) {
 	const User = sequelize.define('user', {
 		id: {
 			autoIncrement: true,
 			primaryKey: true,
-			type: Sequelize.INTEGER
+			type: DataTypes.INTEGER
 		},
 		firstname: {
-			type: Sequelize.STRING,
+			type: DataTypes.STRING,
 			notEmpty: true
 		},
 		lastname: {
-			type: Sequelize.STRING,
+			type: DataTypes.STRING,
 			notEmpty: true
 		}
 	});
-
 	return User;
 };
