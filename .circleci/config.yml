@@ -52,3 +52,6 @@ workflows:
       - dev-deploy:
           requires:
             - test
+          filters:
+            branches:
+              only: /^(dev|release/.+)$/
