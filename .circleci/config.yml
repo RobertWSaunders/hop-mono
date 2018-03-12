@@ -23,8 +23,17 @@ jobs:
           name: Build React Client
           command: npm run client-prod
       - run:
+          name: Build Enviroment Variable File
+          command: |
+            echo "FORCE_SSL=${FORCE_SSL}" > .env
+            echo "DB_ENVIRONMENT=${DB_ENVIRONMENT}" > .env
+            echo "DB_USER=${DB_USER}" > .env
+            echo "DB_PASSWORD=${DB_PASSWORD}" > .env
+            echo "DB_NAME=${DB_NAME}" > .env
+            echo "INSTANCE_CONNECTION_NAME=${INSTANCE_CONNECTION_NAME}" > .env
+      - run:
           name: Add CircleCI Google Service Account Credentials
-          command: echo ${GCLOUD_SERVICE_KEY} | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+          command: echo ${GCLOUD_SERVICE_KEY} | base64 -d > ${HOME}/gcloud-service-key.json
       - run:
           name: Add Google Service Account Credentials to GCloud SDK
           command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
