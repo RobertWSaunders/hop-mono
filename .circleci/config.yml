@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: Install NPM Dependencies
+          command: npm install
+      - run:
+          name: Run Project Tests
+          command: npm test
+  dev-deploy:
+    docker:
+      - image: lakoo/node-gcloud-docker:latest
+    steps:
+      - checkout
+      - run:
+          name: Install NPM Dependencies
+          command: npm install
+      - run:
+          name: Build React Client
+          command: npm run client-prod
+      - run:
+          name: Add CircleCI Google Service Account Credentials
+          command: echo ${GCLOUD_SERVICE_KEY} | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Add Google Service Account Credentials to GCloud SDK
+          command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: Set GCloud SDK Project
+          command: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - deploy:
+          name: Deploy to Google App Engine
+          command: gcloud app deploy app-stage.yaml --quiet
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+      - dev-deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /^(dev|release/.+)$/
