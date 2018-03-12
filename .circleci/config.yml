@@ -24,7 +24,7 @@ jobs:
           command: npm run client-prod
       - run:
           name: Add CircleCI Google Service Account Credentials
-          command: echo ${GCLOUD_SERVICE_KEY} | base64 -d -i > ${HOME}/gcloud-service-key.json
+          command: echo ${GCLOUD_SERVICE_KEY} | base64 -d > ${HOME}/gcloud-service-key.json
       - run:
           name: Add Google Service Account Credentials to GCloud SDK
           command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
