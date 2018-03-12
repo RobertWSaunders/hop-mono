@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 const Client = () => {
 	return (
 		<div>
-			Hello Hop!
+			Hello Hop! This is the web app we are building!
 		</div>
 	);
 };

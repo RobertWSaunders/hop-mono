@@ -20,12 +20,8 @@ jobs:
           name: Install NPM Dependencies
           command: npm install
       - run:
-          name: Build Enviroment Variable File
-          command: |
-            echo "AUTH_SECRET=${AUTH_SECRET}" > .env
-      - run:
-          name: Update Google Cloud SDK Components
-          command: gcloud --quiet components update
+          name: Build React Client
+          command: npm run client-prod
       - run:
           name: Add CircleCI Google Service Account Credentials
           command: echo ${GCLOUD_SERVICE_KEY} | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json

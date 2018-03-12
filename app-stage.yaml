@@ -6,11 +6,7 @@ automatic_scaling:
     target_utilization: 0.5
 
 env_variables:
-  NODE_ENV: test
-  DB_TEST_USER: robertsaunders
-  DB_TEST_PASSWORD: Numberfour$4
-  DB_TEST_NAME: hop-stage-database
-  INSTANCE_CONNECTION_NAME: hop-stage-195003:us-east4:hop-databases
+  NODE_ENV: production
 
 beta_settings:
   cloud_sql_instances: hop-stage-195003:us-east4:hop-databases

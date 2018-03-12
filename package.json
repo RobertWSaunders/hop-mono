@@ -6,12 +6,11 @@
   "scripts": {
     "server-dev": "cross-env NODE_ENV=development nodemon server",
     "server-debug": "cross-env NODE_ENV=development nodemon --inspect server",
-    "server-test": "cross-env NODE_ENV=test node server",
     "start": "cross-env NODE_ENV=production node server",
     "client-dev": "cross-env webpack-dev-server",
     "client-prod": "cross-env npm run client-clean && NODE_ENV=production webpack",
     "client-clean": "cross-env rimraf ./client/bundle",
-    "test": "cross-env eslint --quiet server/**/*.js client/**/*.js && jest --colors --coverage || true"
+    "test": "cross-env eslint --quiet server/**/*.js client/**/*.js && jest --colors || true"
   },
   "dependencies": {
     "apollo-client": "^2.2.6",

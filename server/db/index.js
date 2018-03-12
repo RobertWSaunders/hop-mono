@@ -3,10 +3,15 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const config = require('./config');
 
-const env = process.env.NODE_ENV || 'development';
-const db_config = config[env];
+const isProd = process.env.NODE_ENV === 'production';
+const db_env = process.env.DB_ENVIRONMENT || 'development';
+const db_config = config[db_env];
 
 const database = (logger) => {
+
+	if (isProd && process.env.INSTANCE_CONNECTION_NAME) {
+		db_config.host = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+	}
 
 	const sequelize = new Sequelize(db_config);
 

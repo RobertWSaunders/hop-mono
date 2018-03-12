@@ -8,6 +8,9 @@ const db = require('./db')(logger);
 const express = require('express');
 const path = require('path');
 
+const IS_PROD = process.env.NODE_ENV === 'production';
+const FORCE_SSL = process.env.FORCE_SSL === 'true';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -23,9 +26,22 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+if (IS_PROD) {
+	if (FORCE_SSL) {
+		app.enable('trust proxy');
+		app.use((req, res, next) => {
+				if (req.secure) {
+					next();
+				} else {
+					res.redirect('https://' + req.headers.host + req.url);
+				}
+		});
+	}
+}
+
 app.use('/graphql', expressGraphQL({
-  schema,
-  graphiql: true
+	schema,
+	graphiql: true
 }));
 
 app.use(express.static(BUNDLE_DIR));
