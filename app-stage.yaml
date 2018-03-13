@@ -7,7 +7,6 @@ automatic_scaling:
 
 env_variables:
   NODE_ENV: production
-  DB_USER: root
 
 beta_settings:
   cloud_sql_instances: hop-stage-195003:us-east4:hop-databases
