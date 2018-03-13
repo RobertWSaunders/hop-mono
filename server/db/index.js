@@ -13,7 +13,7 @@ const database = (logger) => {
 		db_config.host = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 	}
 
-	logger.info(db_config);
+	logger.info(JSON.stringify(db_config));
 
 	const sequelize = new Sequelize(db_config);
 
