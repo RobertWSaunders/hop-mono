@@ -5,8 +5,5 @@ automatic_scaling:
   cpu_utilization:
     target_utilization: 0.5
 
-env_variables:
-  NODE_ENV: production
-
 beta_settings:
   cloud_sql_instances: hop-production-195003:us-east4:hop-databases
