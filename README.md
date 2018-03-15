@@ -4,6 +4,8 @@
 
 The server backend and web client for Hop! More documentation to come.
 
+http://graphql.org/learn/queries/#mutations
+s
 ## Configuration
 
 For development this project uses `dotenv` to allow you tp specify environment variables in a static file.
