@@ -1,30 +1,15 @@
-const { PubSub } = require('graphql-subscriptions');
+const userResolvers = require('./UserResolvers');
+const resolvers = [userResolvers];
 
-const pubsub = new PubSub();
+let queries = {};
+let subscriptions = {};
+let mutations = {};
 
-const subscriptionKeys = {
-	userAdded: 'USER_ADDED'
-};
-
-const subscriptions = {
-	userAdded: {
-		subscribe: () => pubsub.asyncIterator(subscriptionKeys.userAdded)
-	}
-};
-
-const queries = {
-	getUser: (parent, { firstname }, { db }) => {
-		return db.user.findOne({ where: { firstname }});
-	}
-};
-
-const mutations = {
-	createUser: async (parent, args, { db }) => {
-		const userToAdd = await db.user.create(args);
-		pubsub.publish(subscriptionKeys.userAdded, { userAdded: userToAdd });
-		return userToAdd;
-	}
-};
+resolvers.forEach((resolver) => {
+	queries = Object.assign(queries, resolver.queries);
+	subscriptions = Object.assign(subscriptions, resolver.subscriptions);
+	mutations = Object.assign(mutations, resolver.mutations);
+});
 
 module.exports = {
 	RootSubscription: subscriptions,
