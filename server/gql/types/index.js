@@ -1,17 +1,18 @@
 const UserType = require('./UserType');
+const AuthType = require('./AuthType');
 
 const types = [];
 const queries = [];
 const mutations = [];
 const subscriptions = [];
 
-const schemas = [UserType];
+const schemas = [UserType, AuthType];
 
 schemas.forEach((s) => {
-  types.push(s.types);
-  queries.push(s.queries);
-  mutations.push(s.mutations);
-	subscriptions.push(s.subscriptions);
+	if (s.types) types.push(s.types);
+	if (s.queries) queries.push(s.queries);
+	if (s.mutations) mutations.push(s.mutations);
+	if (s.subscriptions) subscriptions.push(s.subscriptions);
 });
 
 module.exports = `

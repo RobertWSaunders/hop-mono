@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { createServer } = require('http');
 const logger = require('./utils/logger');
 const schema = require('./gql/schema');
+const auth = require('./auth/auth');
 const db = require('./db')(logger);
 const express = require('express');
 const path = require('path');
@@ -33,6 +34,9 @@ if (IS_PROD) {
 	}
 }
 
+// Authentication Middleware
+app.use(auth(db));
+
 // GraphiQL IDE (Dev Only)
 if (!IS_PROD) {
 	app.use('/graphiql',
@@ -49,7 +53,8 @@ app.use('/graphql',
 	graphqlExpress((req, res) => ({
 		schema,
 		context: {
-			db
+			db,
+			user: req.user
 		}
 	}))
 );

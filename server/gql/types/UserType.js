@@ -32,6 +32,16 @@ const mutations = `
 	Creates a user if supplied proper arguments.
 	"""
 	createUser(firstname: String!, lastname: String!): User!
+
+	"""
+	Updates a user by their unique identifier.
+	"""
+	updateUserById(id: Int!): User!
+
+	"""
+	Deletes a user by their unique identifier.
+	"""
+	deleteUserById(id: Int!): User!
 `;
 
 const subscriptions = `

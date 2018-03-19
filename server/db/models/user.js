@@ -12,7 +12,16 @@ module.exports = function(sequelize, DataTypes) {
 		lastname: {
 			type: DataTypes.STRING,
 			notEmpty: true
+		},
+		email: {
+			type: DataTypes.STRING
+		},
+		password: {
+			type: DataTypes.STRING
 		}
 	});
 	return User;
 };
+
+
+// confirmed attribute in the database
