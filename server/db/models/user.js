@@ -22,6 +22,3 @@ module.exports = function(sequelize, DataTypes) {
 	});
 	return User;
 };
-
-
-// confirmed attribute in the database

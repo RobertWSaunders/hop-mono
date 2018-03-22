@@ -18,11 +18,11 @@ const queries = {
 };
 
 const mutations = {
-	createUser: async (parent, args, { db }) => {
-		const userToAdd = await db.user.create(args);
+	createUser: requiresAuth.createResolver((parent, args, { db }) => {
+		const userToAdd = db.user.create(args);
 		pubsub.publish(subscriptionKeys.userAdded, { userAdded: userToAdd });
 		return userToAdd;
-	}
+	})
 };
 
 module.exports = {

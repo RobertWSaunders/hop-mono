@@ -11,7 +11,7 @@ const createResolver = (resolver) => {
 };
 
 const requiresAuth = createResolver((parent, args, context) => {
-	if (!context.user || !context.user.id) {
+	if (!context.userId) {
 		throw new Error('Not authenticated!');
 	}
 });

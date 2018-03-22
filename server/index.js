@@ -10,6 +10,7 @@ const auth = require('./auth/auth');
 const db = require('./db')(logger);
 const express = require('express');
 const path = require('path');
+const api = require('./api');
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 const FORCE_SSL = process.env.FORCE_SSL === 'true';
@@ -37,6 +38,14 @@ if (IS_PROD) {
 // Authentication Middleware
 app.use(auth(db));
 
+// middleware only to attach user to request
+
+// Controllers
+const ctrs = require('./controllers')(db);
+
+// Restful API Endpoints (Mainly Auth)
+app.use('/api/', api(ctrs));
+
 // GraphiQL IDE (Dev Only)
 if (!IS_PROD) {
 	app.use('/graphiql',
@@ -54,7 +63,8 @@ app.use('/graphql',
 		schema,
 		context: {
 			db,
-			user: req.user
+			ctrs,
+			userId: req.userId
 		}
 	}))
 );

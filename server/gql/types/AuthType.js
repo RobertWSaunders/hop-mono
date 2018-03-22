@@ -32,6 +32,10 @@ const mutations = `
 	signup(email: String!, password: String!): AuthInfo!
 
 	"""
+	"""
+	refresh(refresgToken: String!): AuthInfo!
+
+	"""
 	Hey
 	"""
 	facebookAuth(token: String!): AuthInfo!
