@@ -38,8 +38,6 @@ if (IS_PROD) {
 // Authentication Middleware
 app.use(auth(db));
 
-// middleware only to attach user to request
-
 // Controllers
 const ctrs = require('./controllers')(db);
 
@@ -76,7 +74,7 @@ app.use(express.static(BUNDLE_DIR));
 const server = createServer(app);
 
 // Database Synchronization and Subcriptions Setup
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
 	logger.info('Database has synchronized successfully!');
 
 	server.listen(port, () => {

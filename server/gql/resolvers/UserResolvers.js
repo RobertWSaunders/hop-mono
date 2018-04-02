@@ -13,13 +13,13 @@ const subscriptions = {
 
 const queries = {
 	getUser: (parent, { firstname }, { db }) => {
-		return db.user.findOne({ where: { firstname }});
+		return db.User.findOne({ where: { firstname }});
 	}
 };
 
 const mutations = {
 	createUser: requiresAuth.createResolver((parent, args, { db }) => {
-		const userToAdd = db.user.create(args);
+		const userToAdd = db.User.create(args);
 		pubsub.publish(subscriptionKeys.userAdded, { userAdded: userToAdd });
 		return userToAdd;
 	})

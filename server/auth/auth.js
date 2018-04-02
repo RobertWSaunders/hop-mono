@@ -32,6 +32,14 @@ function getBearer(req) {
 
 module.exports = () => (req, res, next) => {
 
+	// if no token provided allow through, graphql will bounce them if auth is required
+	//
+	// if token is provided validate it and add user onto the request for gql to check
+	//
+	// refresh token logic is left for gql
+
+	// check for the token
+	// validate the access token
 		//const token = getBearer(req);
 
 		//jwt.verify(token, AUTH_SECRET, (err, decoded) => {

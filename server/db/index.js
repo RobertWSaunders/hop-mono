@@ -22,17 +22,12 @@ const database = (logger) => {
 			throw new Error();
 		});
 
-	const db = {};
-
-	const modelsDir = path.join(__dirname, '/models');
-
-	fs.readdirSync(modelsDir).filter((file) => {
-			return (file.indexOf(".") !== 0) && (file !== "index.js");
-		})
-		.forEach((file) => {
-			const model = sequelize.import(path.join(modelsDir, file));
-			db[model.name] = model;
-		});
+	const db = {
+		User: sequelize.import('./models/user'),
+		FBAuth: sequelize.import('./models/fb_auth'),
+		LocalAuth: sequelize.import('./models/local_auth'),
+		RefreshToken: sequelize.import('./models/refresh_token')
+	};
 
 	Object.keys(db).forEach((modelName) => {
 		if ('associate' in db[modelName]) {
