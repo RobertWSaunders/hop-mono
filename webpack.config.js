@@ -42,16 +42,16 @@ module.exports = {
 		})
 	],
 	devServer: {
-        historyApiFallback: {
-            disableDotRule: true,
-            index: '/'
-        },
-        compress: true,
-        proxy: {
-            '/graphql': {
-                target: DEV_PROXY,
-                changeOrigin: true
-            }
-        }
-    }
+		historyApiFallback: {
+			disableDotRule: true,
+			index: '/'
+		},
+		compress: true,
+		proxy: {
+			'/graphql': {
+				target: DEV_PROXY,
+				changeOrigin: true
+			}
+		}
+	}
 };
