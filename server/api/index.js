@@ -1,10 +1,12 @@
 const { Router } = require("express");
-const authRoutes = require("./routes/auth.routes");
+const authRoutesV1 = require("./v1/routes/auth.routes");
+
+const V1 = "v1";
 
 module.exports = (ctrs) => {
 	const api = Router();
 
-	api.use("/", authRoutes(ctrs));
+	api.use(`/${V1}/`, authRoutesV1(ctrs));
 
 	return api;
 };

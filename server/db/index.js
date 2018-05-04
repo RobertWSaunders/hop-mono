@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const Sequelize = require("sequelize");
 const config = require("./config");
+const Sequelize = require("sequelize");
 
 const isProd = process.env.NODE_ENV === "production";
 const db_env = process.env.DB_ENVIRONMENT || "development";

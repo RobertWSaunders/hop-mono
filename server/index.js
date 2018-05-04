@@ -26,11 +26,11 @@ if (IS_PROD) {
 	if (FORCE_SSL) {
 		app.enable('trust proxy');
 		app.use((req, res, next) => {
-				if (req.secure) {
-					next();
-				} else {
-					res.redirect('https://' + req.headers.host + req.url);
-				}
+			if (req.secure) {
+				next();
+			} else {
+				res.redirect('https://' + req.headers.host + req.url);
+			}
 		});
 	}
 }
@@ -79,14 +79,14 @@ db.sequelize.sync({ force: true }).then(() => {
 
 	server.listen(port, () => {
 		new SubscriptionServer({
-				execute,
-				subscribe,
-				schema
-			},
-			{
-				server,
-				path: '/subscriptions'
-			},
+			execute,
+			subscribe,
+			schema
+		},
+		{
+			server,
+			path: '/subscriptions'
+		},
 		);
 	});
 }).catch((err) => {
