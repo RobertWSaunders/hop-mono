@@ -1,6 +1,7 @@
 # hop-monolith
 
-![CircleCI](https://circleci.com/gh/hoptime/hop-monolith.svg?style=svg&circle-token=0621e66291817711447031ede3acd2c1266c4d47)
+![CircleCI](https://circleci.com/gh/hoptime/hop-monolith.svg?style=svg&circle-token=0621e66291817711447031ede3acd2c1266c4d47) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+
 
 The server backend and web client for Hop! More documentation to come.
 
@@ -33,6 +34,6 @@ npm run client-dev
 # build the front end for production
 npm run client-prod
 
-# test the server code (lints code, checks for security vulnerabilities in dependencies and outdated dependencies)
+# test the server code
 npm run test
 ```

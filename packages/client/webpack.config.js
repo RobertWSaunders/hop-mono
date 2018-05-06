@@ -12,10 +12,10 @@ const mode = (isProd) ?
 const PORT = process.env.PORT || 3000;
 const DEV_PROXY = process.env.DEV_PROXY || `http://localhost:${PORT}`;
 
-const CLIENT_DIR = path.resolve('client');
-const CLIENT_ENTRY = path.join(CLIENT_DIR, '/Client.js');
-const CLIENT_OUTPUT = path.join(__dirname, './client/bundle');
-const CLIENT_TEMPLATE = path.resolve('client/index.html');
+const CLIENT_DIR = path.resolve('./');
+const CLIENT_ENTRY = path.join(CLIENT_DIR, 'Client.js');
+const CLIENT_OUTPUT = path.join(__dirname, './bundle');
+const CLIENT_TEMPLATE = path.resolve('./index.html');
 
 module.exports = {
 	entry: {

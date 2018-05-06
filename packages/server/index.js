@@ -78,6 +78,7 @@ db.sequelize.sync({ force: true }).then(() => {
 	logger.info('Database has synchronized successfully!');
 
 	server.listen(port, () => {
+
 		new SubscriptionServer({
 			execute,
 			subscribe,

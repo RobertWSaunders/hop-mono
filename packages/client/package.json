@@ -4,9 +4,9 @@
   "description": "Web client for Hop!",
   "author": "Robert Saunders and James Simpson",
   "scripts": {
-    "dev": "cross-env webpack-dev-server",
-    "build": "cross-env npm run client-clean && NODE_ENV=production webpack",
-    "clean": "cross-env rimraf ./bundle"
+    "dev": "webpack-dev-server",
+    "build": "npm run clean && NODE_ENV=production webpack",
+    "clean": "rimraf ./bundle"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.2.0",
@@ -27,12 +27,12 @@
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "@babel/preset-react": "^7.0.0-beta.46",
-    "babel-jest": "^22.4.3",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "html-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.2",
     "webpack": "^4.6.0",
