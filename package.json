@@ -5,7 +5,7 @@
   "author": "Robert Saunders and James Simpson",
   "scripts": {
     "bootstrap": "npm install --unsafe-perm || ((if [ -f npm-debug.log ]; then cat npm-debug.log; fi) && false) && lerna bootstrap --hoist",
-    "build": "npm run test && lerna run build --stream",
+    "build": "npm run test && lerna run build --scope hop-client --stream",
     "dev": "lerna run dev --scope hop-server --scope hop-client --stream --parallel",
     "start": "lerna run start --scope hop-server --stream",
     "test": "eslint packages/**/*.js",

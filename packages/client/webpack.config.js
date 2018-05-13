@@ -10,7 +10,7 @@ const mode = (isProd) ?
 	'development';
 
 const PORT = process.env.PORT || 3000;
-const DEV_PROXY = process.env.DEV_PROXY || `http://localhost:${PORT}`;
+const DEV_PROXY = process.env.DEV_PROXY || `https://localhost:${PORT}`;
 
 const CLIENT_DIR = path.resolve('./');
 const CLIENT_ENTRY = path.join(CLIENT_DIR, 'Client.js');

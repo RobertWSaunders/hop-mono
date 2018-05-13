@@ -28,7 +28,7 @@ const cache = new InMemoryCache();
 
 const stateLink = withClientState({ cache, resolvers, defaults, typeDefs });
 
-const transportlink = ApolloLink.split(
+const transportLink = ApolloLink.split(
 	({ query: { definitions } }) =>
 		definitions.some(
 			({ kind, operation }) =>
@@ -40,8 +40,7 @@ const transportlink = ApolloLink.split(
 		})
 	),
 	new HttpLink({
-		uri: GRAPHQL_ENDPOINT,
-		credentials: "same-origin"
+		uri: GRAPHQL_ENDPOINT
 	})
 );
 
@@ -58,7 +57,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const apolloClient = new ApolloClient({
 	cache,
-	link: ApolloLink.from([errorLink, stateLink, transportlink])
+	link: ApolloLink.from([errorLink, stateLink, transportLink])
 });
 
 const Client = () => (

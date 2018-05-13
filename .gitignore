@@ -4,7 +4,7 @@ node_modules
 .env
 .DS_STORE
 .vscode/
-packages/client/bundle/*
-packages/email/dist/*
+packages/client/bundle/
+packages/email/dist/
 package-lock.json
 lerna-debug.log
