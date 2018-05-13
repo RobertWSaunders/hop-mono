@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
+const history = require('connect-history-api-fallback');
 const { execute, subscribe } = require('graphql');
 const bodyParser = require('body-parser');
 const { createServer } = require('http');
@@ -11,6 +12,7 @@ const db = require('./db')(logger);
 const express = require('express');
 const path = require('path');
 const api = require('./api');
+const cors = require('cors');
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 const FORCE_SSL = process.env.FORCE_SSL === 'true';
@@ -34,6 +36,9 @@ if (IS_PROD) {
 		});
 	}
 }
+
+// Add CORS
+app.use(cors());
 
 // Authentication Middleware
 app.use(auth(db));
@@ -66,6 +71,9 @@ app.use('/graphql',
 		}
 	}))
 );
+
+// Fallback if Required
+app.use(history());
 
 // Static Files
 app.use(express.static(BUNDLE_DIR));

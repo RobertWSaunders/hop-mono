@@ -18,11 +18,17 @@ const queries = {
 };
 
 const mutations = {
-	createUser: requiresAuth.createResolver((parent, args, { db }) => {
+	// createUser: requiresAuth.createResolver((parent, args, { db }) => {
+	// 	const userToAdd = db.User.create(args);
+	// 	pubsub.publish(subscriptionKeys.userAdded, { userAdded: userToAdd });
+	// 	return userToAdd;
+	// })
+	createUser: (parent, args, { db }) => {
+		console.log('Creating a user!');
 		const userToAdd = db.User.create(args);
 		pubsub.publish(subscriptionKeys.userAdded, { userAdded: userToAdd });
 		return userToAdd;
-	})
+	}
 };
 
 module.exports = {
