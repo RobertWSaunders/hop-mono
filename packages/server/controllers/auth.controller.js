@@ -34,7 +34,7 @@ function createRefreshToken(userId) {
 }
 
 module.exports = (db) => ({
-	async refresh(refreshToken) {
+	refresh(refreshToken) {
 		jwt.verify(refreshToken, AUTH_SECRET, (err, decoded) => {
 			if (decoded.type !== "refresh") {
 				// invalid token, not a refresh token

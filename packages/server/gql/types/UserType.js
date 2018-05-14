@@ -2,25 +2,53 @@ const types = `
 	"""
 	The User type definition. A user is someone that uses our application.
 	"""
-	type User {
+	type User implements Node {
 		"""
 		The users unique identifier.
 		"""
-		id: Int!
+		id: ID!
 
 		"""
 		The users first name.
 		"""
-		firstname: String!
+		firstName: String!
 
 		"""
 		The users last name.
 		"""
-		lastname: String!
+		lastName: String!
+
+		"""
+		The users email.
+		"""
+		email: String!
+
+		"""
+		The users date of birth.
+		"""
+		dob: Date!
+	}
+
+	type UserCreatePayload {
+
+	}
+
+	type UserDeletePayload {
+
+	}
+
+	type UserUpdatePayload {
+
 	}
 `;
 
 const queries = `
+	"""
+	"""
+	getUserByID(id: ID!): User!
+
+
+
 	"""
 	Retrieves a user if supplied proper arguments.
 	"""
@@ -28,20 +56,21 @@ const queries = `
 `;
 
 const mutations = `
+
+	"""
+	Deletes a user, given the users identifier.
+	"""
+	userDelete(id: ID!): UserDeletePayload!
+
 	"""
 	Creates a user if supplied proper arguments.
 	"""
-	createUser(firstname: String!, lastname: String!): User!
+	userCreate(firstName: String!, lastName: String!, email: String!, dob: Date): UserCreatePayload!
 
 	"""
 	Updates a user by their unique identifier.
 	"""
-	updateUserById(id: Int!): User!
-
-	"""
-	Deletes a user by their unique identifier.
-	"""
-	deleteUserById(id: Int!): User!
+	userUpdateByID(id: ID!): UserUpdatePayload!
 `;
 
 const subscriptions = `

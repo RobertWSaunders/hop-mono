@@ -82,6 +82,7 @@ app.use(express.static(BUNDLE_DIR));
 const server = createServer(app);
 
 // Database Synchronization and Subcriptions Setup
+// NOTE: We only do force true here for the sake of developing.
 db.sequelize.sync({ force: true }).then(() => {
 	logger.info('Database has synchronized successfully!');
 

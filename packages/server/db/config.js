@@ -1,6 +1,10 @@
 const options = {
 	operatorsAliases: false,
-	logging: false
+	logging: false,
+	define: {
+		underscored: false,
+		timestamps: true
+	}
 };
 
 const config = {

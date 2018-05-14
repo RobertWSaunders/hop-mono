@@ -16,6 +16,19 @@ schemas.forEach((s) => {
 });
 
 module.exports = `
+
+	scalar Date
+
+	interface Node {
+		id: ID!
+	}
+
+	type UserError {
+		message: String!
+
+		field: [String!]
+	}
+
 	${types.join('\n')}
 
 	"""

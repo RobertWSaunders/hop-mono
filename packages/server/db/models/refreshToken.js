@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-	const RefreshToken = sequelize.define('refresh_token', {
+	const RefreshToken = sequelize.define('refreshToken', {
 		token: {
 			primaryKey: true,
 			type: DataTypes.STRING
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 
 	RefreshToken.associate = (models) => {
 		RefreshToken.belongsTo(models.User, {
-			foreignKey: 'user_id'
+			foreignKey: 'id'
 		});
 	};
 

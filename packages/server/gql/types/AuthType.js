@@ -22,23 +22,23 @@ const queries = `
 
 const mutations = `
 	"""
-	Hey
+	The
 	"""
-	login(email: String!, password: String!): AuthInfo!
+	authLogin(email: String!, password: String!): AuthInfo!
 
 	"""
 	Hey
 	"""
-	signup(email: String!, password: String!): AuthInfo!
+	authSignup(email: String!, password: String!): AuthInfo!
 
 	"""
 	"""
-	refresh(refresgToken: String!): AuthInfo!
+	authRefresh(refresgToken: String!): AuthInfo!
 
 	"""
 	Hey
 	"""
-	facebookAuth(token: String!): AuthInfo!
+	authFacebook(token: String!): AuthInfo!
 `;
 
 module.exports = {

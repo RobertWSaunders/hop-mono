@@ -28,9 +28,9 @@ const database = (logger) => {
 
 	const db = {
 		User: sequelize.import("./models/user"),
-		FBAuth: sequelize.import("./models/fb_auth"),
-		LocalAuth: sequelize.import("./models/local_auth"),
-		RefreshToken: sequelize.import("./models/refresh_token")
+		FBAuth: sequelize.import("./models/fbAuth"),
+		LocalAuth: sequelize.import("./models/localAuth"),
+		RefreshToken: sequelize.import("./models/refreshToken")
 	};
 
 	Object.keys(db).forEach((modelName) => {

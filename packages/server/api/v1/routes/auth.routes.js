@@ -8,7 +8,7 @@ module.exports = (ctr) => {
 	const { auth } = ctr;
 
 	authAPI.use(`/${AUTH}/refresh`, (req, res) => {
-		res.send(200);
+		auth.refresh()
 	});
 
 	return authAPI;

@@ -15,9 +15,12 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 
 const rootElement = document.querySelector('#root');
 
-const GRAPHQL_ENDPOINT = process.env.NODE_ENV === "development"
-	? `https://localhost:3000/graphql`
-	: `https://${window.location.host}/graphql`;
+// TODO: Understand why we have to use ngrok here!
+// Comment added to this thread: https://bit.ly/2IbZspP
+const GRAPHQL_ENDPOINT =
+	process.env.NODE_ENV === "development"
+		? ` https://saunders.ngrok.io/graphql`
+		: `https://${window.location.host}/graphql`;
 
 const WS_GRAPHQL_ENDPOINT =
 	process.env.NODE_ENV === "development"
@@ -56,8 +59,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const apolloClient = new ApolloClient({
-	cache,
-	link: ApolloLink.from([errorLink, stateLink, transportLink])
+	link: ApolloLink.from([errorLink, stateLink, transportLink]),
+	cache
 });
 
 const Client = () => (
