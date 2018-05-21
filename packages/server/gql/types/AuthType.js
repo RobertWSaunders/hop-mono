@@ -19,9 +19,9 @@ const types = `
 		email: String!
 
 		"""
-		The users date of birth.
+		The users password.
 		"""
-		dob: String
+		password: String!
 	}
 
 	"""
@@ -72,6 +72,11 @@ const types = `
 		Refresh token to be used refresh the access token if it has expired.
 		"""
 		refreshToken: String!
+
+		"""
+		The user that has been authenticated.
+		"""
+		user: User
 	}
 `;
 

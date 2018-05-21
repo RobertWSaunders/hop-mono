@@ -1,7 +1,7 @@
 const uuidv4 = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-	const User = sequelize.define('user', {
+	const User = sequelize.define('User', {
 		userId: {
 			primaryKey: true,
 			type: DataTypes.STRING,
@@ -12,21 +12,19 @@ module.exports = (sequelize, DataTypes) => {
 		firstName: {
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
 				notEmpty: true
 			},
 			set(val) {
-				this.setDataValue('firstName', val.charAt(0).toUpperCase() + string.slice(1));
+				this.setDataValue('firstName', val.charAt(0).toUpperCase() + val.slice(1));
 			}
 		},
 		lastName: {
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
 				notEmpty: true
 			},
 			set(val) {
-				this.setDataValue('lastName', val.charAt(0).toUpperCase() + string.slice(1));
+				this.setDataValue('lastName', val.charAt(0).toUpperCase() + val.slice(1));
 			}
 		},
 		dob: {

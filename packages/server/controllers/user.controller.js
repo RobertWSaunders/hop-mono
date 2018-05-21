@@ -17,9 +17,13 @@ module.exports = (db, logger) => ({
 
 	createUser: (userInfo) => {
 		return new Promise((resolve, reject) => {
-			const user = db.User.create(userInfo);
-			resolve(user);
+			const { firstName, lastName, email } = userInfo;
+			const user = db.User.create({
+				firstName,
+				lastName,
+				email
+			});
+			return resolve(user);
 		});
 	}
-
 });

@@ -13,6 +13,9 @@ type AuthInfo {
 
   """Refresh token to be used refresh the access token if it has expired."""
   refreshToken: String!
+
+  """The user that has been authenticated."""
+  user: User
 }
 
 """Input required to authenticate with Facebook."""
@@ -46,7 +49,7 @@ type RootMutation {
   userDelete(id: ID!): User!
 
   """Updates a user by their unique identifier."""
-  userUpdate(id: ID!): User!
+  userUpdate(id: ID!, userInfo: UserInfoInput!): User!
 
   """Creates a user if supplied proper arguments."""
   userCreate(userInfo: UserInfoInput!): User!
@@ -73,7 +76,7 @@ Serves as the entrypoint for all other GraphQL queries.
 """
 type RootQuery {
   """Retreives a user by the users unique identifier."""
-  getUserByID(id: ID!): User!
+  getUser(id: ID!): User!
 }
 
 """
@@ -82,8 +85,14 @@ notfied of things that change on the server side without having to explicitly
 ask for it. Serves as the entrypoint for all other GraphQL subscriptions.
 """
 type RootSubscription {
-  """Publishes when a new user is created or added to the database."""
+  """Publishes when a new user is created."""
   userAdded: User!
+
+  """Publishes when a user is deleted."""
+  userDeleted: User!
+
+  """Publishes when a user is updated."""
+  userUpdated: User!
 }
 
 """Input required to signup a new user."""
@@ -97,8 +106,8 @@ input SignupInfoInput {
   """The users email."""
   email: String!
 
-  """The users date of birth."""
-  dob: String
+  """The users password."""
+  password: String!
 }
 
 """
@@ -122,7 +131,7 @@ type User {
 }
 
 """Input required to create a user."""
-type UserInfoInput {
+input UserInfoInput {
   """The users first name."""
   firstName: String!
 

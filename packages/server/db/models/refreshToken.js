@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-	const RefreshToken = sequelize.define('refreshToken', {
+	const RefreshToken = sequelize.define("RefreshToken", {
 		refreshToken: {
 			primaryKey: true,
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
+				allowNull: false,
 				notEmpty: true
 			}
 		}

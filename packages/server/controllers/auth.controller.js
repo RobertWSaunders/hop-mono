@@ -40,7 +40,27 @@ module.exports = (db, controller) => ({
 	login: ({ email, password }) => {
 
 	},
-	signup: ({ firstName, lastName, email, dob }) => {
-
+	signup: ({ firstName, lastName, email, password }) => {
+		return new Promise((resolve, reject) => {
+			db.User.create({
+				firstName,
+				lastName
+			}).then((user) => {
+				return db.LocalAuth.create({
+					userId: user.userId,
+					email,
+					password
+				}).then((localAuth) => {
+					return resolve({
+						accessToken: createAccessToken(user.id),
+						refreshToken: createRefreshToken(user.id)
+					});
+				}).catch((err) => {
+					reject(err);
+				});
+			}).catch((err) => {
+				reject(err);
+			});
+		});
 	}
 });

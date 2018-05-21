@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-	const FBAuth = sequelize.define("fbAuth", {
+	const FBAuth = sequelize.define("FbAuth", {
 		fbEmail: {
 			primaryKey: true,
 			type: DataTypes.STRING,
@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
 		fbToken: {
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
+				allowNull: false,
 				notEmpty: true
 			}
 		},
 		fbId: {
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
+				allowNull: false,
 				notEmpty: true
 			}
 		}

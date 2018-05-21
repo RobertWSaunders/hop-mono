@@ -8,3 +8,4 @@ fs.writeFile("./gql/schema.graphql", printSchema(schema), (err) => {
 	}
 });
 
+process.exit();

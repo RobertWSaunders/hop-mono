@@ -3,7 +3,8 @@ const options = {
 	logging: false,
 	define: {
 		underscored: false,
-		timestamps: true
+		timestamps: true,
+		freezeTableName: true
 	}
 };
 

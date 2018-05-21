@@ -1,5 +1,6 @@
 const userResolvers = require('./UserResolvers');
-const resolvers = [userResolvers];
+const authResolvers = require('./AuthResolvers');
+const resolvers = [userResolvers, authResolvers];
 
 let queries = {};
 let subscriptions = {};

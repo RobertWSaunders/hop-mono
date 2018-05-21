@@ -1,22 +1,23 @@
 
 const mutations = {
-	authLogin: (_, args, { ctrs }) => {
-		ctrs.auth.login(args).then((tokens) => {
+	authLogin: (_, { email, password }, { ctrs }) => {
+		ctrs.auth.login({ email, password }).then((tokens) => {
 			return tokens;
 		});
 	},
 	authSignup: (_, args, { ctrs }) => {
-		ctrs.auth.signup(args).then((tokens) => {
+		const { firstName, lastName, email, password } = args.signupInfo;
+		return ctrs.auth.signup({ firstName, lastName, email, password }).then((tokens) => {
 			return tokens;
 		});
 	},
-	authRefresh: (_, args, { ctrs }) => {
-		ctrs.auth.refresh(args).then((tokens) => {
+	authRefresh: (_, { refreshToken }, { ctrs }) => {
+		ctrs.auth.refresh({ refreshToken }).then((tokens) => {
 			return tokens;
 		});
 	},
-	authFacebook: (_, args, context) => {
-		ctrs.fb.facebookAuth(args).then((tokens) => {
+	authFacebook: (_, { facebookToken }, context) => {
+		ctrs.fb.facebookAuth({ facebookToken }).then((tokens) => {
 			return tokens;
 		});
 	}

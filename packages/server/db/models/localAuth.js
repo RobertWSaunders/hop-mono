@@ -3,20 +3,18 @@ const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 4;
 
 module.exports = (sequelize, DataTypes) => {
-	const LocalAuth = sequelize.define("localAuth", {
+	const LocalAuth = sequelize.define("LocalAuth", {
 		email: {
 			primaryKey: true,
 			type: DataTypes.STRING,
 			validate: {
 				isEmail: true,
-				notNull: true,
 				notEmpty: true
 			}
 		},
 		password: {
 			type: DataTypes.STRING,
 			validate: {
-				notNull: true,
 				notEmpty: true
 			}
 		}
