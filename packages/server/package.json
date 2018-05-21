@@ -5,7 +5,8 @@
   "author": "Robert Saunders and James Simpson",
   "scripts": {
     "dev": "NODE_ENV=development nodemon index.js",
-    "start": "NODE_ENV=production node index.js"
+		"start": "NODE_ENV=production node index.js",
+		"dump-schema": "node ./gql/utils/dumpSchema.js"
   },
   "dependencies": {
     "apollo-server-express": "^1.3.6",

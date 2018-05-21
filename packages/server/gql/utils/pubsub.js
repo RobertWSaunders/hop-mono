@@ -1,4 +1,4 @@
-const  { RedisPubSub } = require('graphql-redis-subscriptions');
+const { RedisPubSub } = require('graphql-redis-subscriptions');
 const Redis = require('ioredis');
 
 const options = {

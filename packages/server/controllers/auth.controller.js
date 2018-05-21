@@ -33,13 +33,14 @@ function createRefreshToken(userId) {
 	);
 }
 
-module.exports = (db) => ({
-	refresh(refreshToken) {
-		jwt.verify(refreshToken, AUTH_SECRET, (err, decoded) => {
-			if (decoded.type !== "refresh") {
-				// invalid token, not a refresh token
-			}
-			// create new tokens and save to the database
-		});
+module.exports = (db, controller) => ({
+	refresh: (refreshToken) => {
+		const decoded = jwt.verify(refreshToken, AUTH_SECRET);
+	},
+	login: ({ email, password }) => {
+
+	},
+	signup: ({ firstName, lastName, email, dob }) => {
+
 	}
 });

@@ -7,8 +7,13 @@ module.exports = (ctr) => {
 
 	const { auth } = ctr;
 
-	authAPI.use(`/${AUTH}/refresh`, (req, res) => {
-		auth.refresh()
+	authAPI.use(`/${AUTH}/refresh`, async (req, res) => {
+		try {
+			const tokens = await auth.refresh(req.body.refreshToken);
+			return res.send(200).json({ tokens });
+		} catch (err) {
+			return res.send(401).json({ err });
+		}
 	});
 
 	return authAPI;

@@ -2,7 +2,7 @@ const uuidv4 = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
 	const User = sequelize.define('user', {
-		id: {
+		userId: {
 			primaryKey: true,
 			type: DataTypes.STRING,
 			validate: {
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
 	});
 
 	User.addHook('beforeCreate', (model, options) => {
-		model.id = uuidv4();
+		model.userId = uuidv4();
 	});
 
 	return User;

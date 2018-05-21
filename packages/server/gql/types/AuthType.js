@@ -1,9 +1,68 @@
 const types = `
 	"""
+	Input required to signup a new user.
+	"""
+	input SignupInfoInput {
+		"""
+		The users first name.
+		"""
+		firstName: String!
+
+		"""
+		The users last name.
+		"""
+		lastName: String!
+
+		"""
+		The users email.
+		"""
+		email: String!
+
+		"""
+		The users date of birth.
+		"""
+		dob: String
+	}
+
+	"""
+	Input required to log a user into the application.
+	"""
+	input LoginInfoInput {
+		"""
+		The users email.
+		"""
+		email: String!
+
+		"""
+		The users password.
+		"""
+		password: String!
+	}
+
+	"""
+	Input required to authenticate with Facebook.
+	"""
+	input FacebookAuthInfoInput {
+		"""
+		Client Facebook authentication token.
+		"""
+		facebookToken: String!
+	}
+
+	"""
+	Input to required to refresh tokens.
+	"""
+	input RefreshTokenInfoInput {
+		"""
+		The refresh token to verify token refresh.
+		"""
+		refreshToken: String!
+	}
+
+	"""
 	The AuthInfo type definition. Includes tokens to be used for authentication.
 	"""
 	type AuthInfo {
-
 		"""
 		Access token to be used in requests requiring authentication.
 		"""
@@ -16,33 +75,29 @@ const types = `
 	}
 `;
 
-const queries = `
-
-`;
-
 const mutations = `
 	"""
-	The
+	Authenticates a user, given proper login information.
 	"""
-	authLogin(email: String!, password: String!): AuthInfo!
+	authLogin(loginInfo: LoginInfoInput!): AuthInfo!
 
 	"""
-	Hey
+	Signup a new user, given proper signup information.
 	"""
-	authSignup(email: String!, password: String!): AuthInfo!
+	authSignup(signupInfo: SignupInfoInput!): AuthInfo!
 
 	"""
+	Refreshes a refresh token, given proper refresh token information.
 	"""
-	authRefresh(refresgToken: String!): AuthInfo!
+	authRefresh(refreshToken: RefreshTokenInfoInput!): AuthInfo!
 
 	"""
-	Hey
+	Authenticates a user utilizing Facebook, given proper Facebook authentication information.
 	"""
-	authFacebook(token: String!): AuthInfo!
+	authFacebook(facebookAuthInfo: FacebookAuthInfoInput!): AuthInfo!
 `;
 
 module.exports = {
 	types,
-	queries,
 	mutations
 };

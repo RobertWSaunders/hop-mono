@@ -1,0 +1,137 @@
+schema {
+  query: RootQuery
+  mutation: RootMutation
+  subscription: RootSubscription
+}
+
+"""
+The AuthInfo type definition. Includes tokens to be used for authentication.
+"""
+type AuthInfo {
+  """Access token to be used in requests requiring authentication."""
+  accessToken: String!
+
+  """Refresh token to be used refresh the access token if it has expired."""
+  refreshToken: String!
+}
+
+"""Input required to authenticate with Facebook."""
+input FacebookAuthInfoInput {
+  """Client Facebook authentication token."""
+  facebookToken: String!
+}
+
+"""Input required to log a user into the application."""
+input LoginInfoInput {
+  """The users email."""
+  email: String!
+
+  """The users password."""
+  password: String!
+}
+
+"""Input to required to refresh tokens."""
+input RefreshTokenInfoInput {
+  """The refresh token to verify token refresh."""
+  refreshToken: String!
+}
+
+"""
+The Root Mutation type definition. Mutations allow our clients to mutate
+(modify) information however they want. Serves as the entrypoint for all
+other GraphQL mutations.
+"""
+type RootMutation {
+  """Deletes a user, given the users identifier."""
+  userDelete(id: ID!): User!
+
+  """Updates a user by their unique identifier."""
+  userUpdate(id: ID!): User!
+
+  """Creates a user if supplied proper arguments."""
+  userCreate(userInfo: UserInfoInput!): User!
+
+  """Authenticates a user, given proper login information."""
+  authLogin(loginInfo: LoginInfoInput!): AuthInfo!
+
+  """Signup a new user, given proper signup information."""
+  authSignup(signupInfo: SignupInfoInput!): AuthInfo!
+
+  """Refreshes a refresh token, given proper refresh token information."""
+  authRefresh(refreshToken: RefreshTokenInfoInput!): AuthInfo!
+
+  """
+  Authenticates a user utilizing Facebook, given proper Facebook authentication information.
+  """
+  authFacebook(facebookAuthInfo: FacebookAuthInfoInput!): AuthInfo!
+}
+
+"""
+The Root Query type definition. Queries allow our clients to query (retrieve)
+the information they need. Clients must adhere to a queries required arguments.
+Serves as the entrypoint for all other GraphQL queries.
+"""
+type RootQuery {
+  """Retreives a user by the users unique identifier."""
+  getUserByID(id: ID!): User!
+}
+
+"""
+The Root Subscription type definition. Subscriptions allow our clients to be
+notfied of things that change on the server side without having to explicitly
+ask for it. Serves as the entrypoint for all other GraphQL subscriptions.
+"""
+type RootSubscription {
+  """Publishes when a new user is created or added to the database."""
+  userAdded: User!
+}
+
+"""Input required to signup a new user."""
+input SignupInfoInput {
+  """The users first name."""
+  firstName: String!
+
+  """The users last name."""
+  lastName: String!
+
+  """The users email."""
+  email: String!
+
+  """The users date of birth."""
+  dob: String
+}
+
+"""
+The User type definition. A user is someone that uses our application.
+"""
+type User {
+  """The users unique identifier."""
+  id: ID!
+
+  """The users first name."""
+  firstName: String!
+
+  """The users last name."""
+  lastName: String!
+
+  """The users email."""
+  email: String!
+
+  """The users date of birth."""
+  dob: String
+}
+
+"""Input required to create a user."""
+type UserInfoInput {
+  """The users first name."""
+  firstName: String!
+
+  """The users last name."""
+  lastName: String!
+
+  """The users email."""
+  email: String!
+
+  """The users date of birth."""
+  dob: String
+}

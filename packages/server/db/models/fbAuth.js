@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
 	FBAuth.associate = (models) => {
 		FBAuth.belongsTo(models.User, {
-			foreignKey: 'id'
+			foreignKey: 'userId'
 		});
 	};
 

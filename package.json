@@ -9,8 +9,8 @@
     "dev": "lerna run dev --scope hop-server --scope hop-client --stream --parallel",
     "start": "lerna run start --scope hop-server --stream",
     "test": "eslint packages/**/*.js",
-    "beautify": "prettier-eslint \"packages/**/*.js\" --write"
-  },
+		"beautify": "prettier-eslint \"packages/**/*.js\" --write"
+	},
   "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^8.2.3",

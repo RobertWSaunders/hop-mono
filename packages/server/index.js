@@ -2,11 +2,11 @@ require('dotenv').config();
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
 const history = require('connect-history-api-fallback');
-const { execute, subscribe } = require('graphql');
+const { execute, subscribe, printSchema } = require('graphql');
+const schema = require("./gql/schema")(logger);
 const bodyParser = require('body-parser');
 const { createServer } = require('http');
 const logger = require('./utils/logger');
-const schema = require('./gql/schema');
 const auth = require('./auth/auth');
 const db = require('./db')(logger);
 const express = require('express');
@@ -44,7 +44,7 @@ app.use(cors());
 app.use(auth(db));
 
 // Controllers
-const ctrs = require('./controllers')(db);
+const ctrs = require('./controllers')(db, logger);
 
 // Restful API Endpoints (Mainly Auth)
 app.use('/api/', api(ctrs));

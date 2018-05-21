@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
 	LocalAuth.associate = (models) => {
 		LocalAuth.belongsTo(models.User, {
-			foreignKey: 'id'
+			foreignKey: 'userId'
 		});
 	};
 

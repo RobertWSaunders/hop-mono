@@ -10,6 +10,8 @@ const createResolver = (resolver) => {
 	return baseResolver;
 };
 
+// NOTE: As per GraphQL best practices it is best to leave auth to business layer.
+// i.e. pass context to controllers but this will suffice for now as it private api.
 const requiresAuth = createResolver((parent, args, context) => {
 	if (!context.userId) {
 		throw new Error('Not authenticated!');

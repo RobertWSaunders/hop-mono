@@ -1,14 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
 	const RefreshToken = sequelize.define('refreshToken', {
-		token: {
+		refreshToken: {
 			primaryKey: true,
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			validate: {
+				notNull: true,
+				notEmpty: true
+			}
 		}
 	});
 
 	RefreshToken.associate = (models) => {
 		RefreshToken.belongsTo(models.User, {
-			foreignKey: 'id'
+			foreignKey: 'userId'
 		});
 	};
 

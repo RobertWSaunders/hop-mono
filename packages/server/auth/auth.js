@@ -13,10 +13,12 @@ module.exports = () => (req, res, next) => {
 
 	const token = getBearer(req);
 
-	//NOTE: GQL will take care of auth if no token.
+	// NOTE: GQL will take care of auth if no token.
 	// This won't work if we add authenticated REST endpoints.
 	// Currently no plan for that so this is a suitable solution.
-	if (!token) next();
+	if (!token) {
+		return next();
+	}
 
 	jwt.verify(token, AUTH_SECRET, (err, decoded) => {
 		if (err) {

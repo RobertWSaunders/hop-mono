@@ -1,8 +1,33 @@
 const types = `
 	"""
+	Input required to create a user.
+	"""
+	input UserInfoInput {
+		"""
+		The users first name.
+		"""
+		firstName: String!
+
+		"""
+		The users last name.
+		"""
+		lastName: String!
+
+		"""
+		The users email.
+		"""
+		email: String!
+
+		"""
+		The users date of birth.
+		"""
+		dob: String
+	}
+
+	"""
 	The User type definition. A user is someone that uses our application.
 	"""
-	type User implements Node {
+	type User {
 		"""
 		The users unique identifier.
 		"""
@@ -26,58 +51,49 @@ const types = `
 		"""
 		The users date of birth.
 		"""
-		dob: Date!
-	}
-
-	type UserCreatePayload {
-
-	}
-
-	type UserDeletePayload {
-
-	}
-
-	type UserUpdatePayload {
-
+		dob: String
 	}
 `;
 
 const queries = `
 	"""
+	Retreives a user by the users unique identifier.
 	"""
-	getUserByID(id: ID!): User!
-
-
-
-	"""
-	Retrieves a user if supplied proper arguments.
-	"""
-	getUser(firstname: String!, lastname: String!): User!
+	getUser(id: ID!): User!
 `;
 
 const mutations = `
-
 	"""
 	Deletes a user, given the users identifier.
 	"""
-	userDelete(id: ID!): UserDeletePayload!
-
-	"""
-	Creates a user if supplied proper arguments.
-	"""
-	userCreate(firstName: String!, lastName: String!, email: String!, dob: Date): UserCreatePayload!
+	userDelete(id: ID!): User!
 
 	"""
 	Updates a user by their unique identifier.
 	"""
-	userUpdateByID(id: ID!): UserUpdatePayload!
+	userUpdate(id: ID!, userInfo: UserInfoInput!): User!
+
+	"""
+	Creates a user if supplied proper arguments.
+	"""
+	userCreate(userInfo: UserInfoInput!): User!
 `;
 
 const subscriptions = `
 	"""
-	Publishes when a new user is created or added to the database.
+	Publishes when a new user is created.
 	"""
 	userAdded: User!
+
+	"""
+	Publishes when a user is deleted.
+	"""
+	userDeleted: User!
+
+	"""
+	Publishes when a user is updated.
+	"""
+	userUpdated: User!
 `;
 
 module.exports = {
