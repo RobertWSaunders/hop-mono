@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const uuidv4 = require("uuid");
 
 const JWT_ISSUER = "Hop Authentication";
 const ACCESS_TOKEN_EXPIRE_TIME = "5 minutes";
@@ -33,34 +34,47 @@ function createRefreshToken(userId) {
 	);
 }
 
-module.exports = (db, controller) => ({
+module.exports = (db, logger) => ({
 	refresh: (refreshToken) => {
 		const decoded = jwt.verify(refreshToken, AUTH_SECRET);
 	},
+
 	login: ({ email, password }) => {
 
 	},
+
 	signup: ({ firstName, lastName, email, password }) => {
 		return new Promise((resolve, reject) => {
-			db.User.create({
-				firstName,
-				lastName
-			}).then((user) => {
-				return db.LocalAuth.create({
-					userId: user.userId,
-					email,
-					password
-				}).then((localAuth) => {
-					return resolve({
-						accessToken: createAccessToken(user.id),
-						refreshToken: createRefreshToken(user.id)
-					});
-				}).catch((err) => {
-					reject(err);
-				});
-			}).catch((err) => {
-				reject(err);
-			});
+			return reject('test');
+			// db.LocalAuth.create({
+			// 	email,
+			// 	password,
+			// 	User: {
+			// 		firstName,
+			// 		lastName
+			// 	}
+			// }, { include: [db.User] }).then((localAuth) => {
+			// 	return db.RefreshToken.create({
+			// 		refreshToken: createRefreshToken(localAuth.userId)
+			// 	}).then((refreshToken) => {
+			// 		return resolve({
+			// 			refreshToken: refreshToken.refreshToken,
+			// 			accessToken: createAccessToken(localAuth.userId),
+			// 			user: {
+			// 				id: localAuth.User.userId,
+			// 				firstName: localAuth.User.firstName,
+			// 				lastName: localAuth.User.lastName,
+			// 				dob: localAuth.User.dob
+			// 			}
+			// 		});
+			// 	}).catch((err) => {
+			// 		logger.error(err);
+			// 		return reject();
+			// 	});
+			// }).catch((err) => {
+			// 	logger.error(err);
+			// 	return reject();
+			// });
 		});
 	}
 });

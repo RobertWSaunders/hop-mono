@@ -49,7 +49,13 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	});
 
+	User.associate = (models) => {
+		User.hasOne(models.LocalAuth, { foreignKey: "userId" });
+		User.hasOne(models.RefreshToken, { foreignKey: "userId" });
+	};
+
 	User.addHook('beforeCreate', (model, options) => {
+		if (model.userId) return;
 		model.userId = uuidv4();
 	});
 

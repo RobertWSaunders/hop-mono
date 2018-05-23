@@ -66,12 +66,12 @@ const types = `
 		"""
 		Access token to be used in requests requiring authentication.
 		"""
-		accessToken: String!
+		accessToken: String
 
 		"""
 		Refresh token to be used refresh the access token if it has expired.
 		"""
-		refreshToken: String!
+		refreshToken: String
 
 		"""
 		The user that has been authenticated.
@@ -89,7 +89,7 @@ const mutations = `
 	"""
 	Signup a new user, given proper signup information.
 	"""
-	authSignup(signupInfo: SignupInfoInput!): AuthInfo!
+	authSignup(signupInfo: SignupInfoInput!): AuthInfo
 
 	"""
 	Refreshes a refresh token, given proper refresh token information.

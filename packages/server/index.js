@@ -3,6 +3,7 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
 const history = require('connect-history-api-fallback');
 const { execute, subscribe } = require('graphql');
+const { formatError } = require('apollo-errors');
 const logger = require("./utils/logger");
 const schema = require("./gql/schema")(logger);
 const bodyParser = require('body-parser');
@@ -59,6 +60,7 @@ if (!IS_PROD) {
 app.use('/graphql',
 	bodyParser.json(),
 	graphqlExpress((req, res) => ({
+		formatError,
 		schema,
 		context: {
 			db,

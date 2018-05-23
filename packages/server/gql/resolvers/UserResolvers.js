@@ -1,4 +1,4 @@
-const { requiresAuth } = require('../utils/permissions');
+const { isAuthenticatedResolver } = require('../utils/baseResolvers');
 const pubsub = require('../utils/pubsub');
 
 const subscriptionKeys = {
@@ -20,7 +20,7 @@ const subscriptions = {
 };
 
 const queries = {
-	getUser: requiresAuth.createResolver((_, { id }, { ctrs }) => {
+	getUser: isAuthenticatedResolver.createResolver((_, { id }, { ctrs }) => {
 		ctrs.user.getUser(id).then((user) => {
 			return user;
 		});
@@ -28,7 +28,7 @@ const queries = {
 };
 
 const mutations = {
-	userDelete: requiresAuth.createResolver((_, { id }, { ctrs }) => {
+	userDelete: isAuthenticatedResolver.createResolver((_, { id }, { ctrs }) => {
 		ctrs.user.deleteUser(id).then((deletedUser) => {
 			pubsub.publish(subscriptionKeys.userDeleted, {
 				userDeleted: deletedUser
@@ -36,22 +36,28 @@ const mutations = {
 			return deletedUser;
 		});
 	}),
-	userUpdate: requiresAuth.createResolver((_, { id, userInfo }, { ctrs }) => {
-		ctrs.user.updateUser(id, userInfo).then((updatedUser) => {
-			pubsub.publish(subscriptionKeys.userUpdated, {
-				userUpdated: updatedUser
+
+	userUpdate: isAuthenticatedResolver.createResolver(
+		(_, { id, userInfo }, { ctrs }) => {
+			ctrs.user.updateUser(id, userInfo).then((updatedUser) => {
+				pubsub.publish(subscriptionKeys.userUpdated, {
+					userUpdated: updatedUser
+				});
+				return updatedUser;
 			});
-			return updatedUser;
-		});
-	}),
-	userCreate: requiresAuth.createResolver((_, { userInfo }, { ctrs }) => {
-		ctrs.user.createUser(userInfo).then((userCreated) => {
-			pubsub.publish(subscriptionKeys.userAdded, {
-				userAdded: userCreated
+		}
+	),
+
+	userCreate: isAuthenticatedResolver.createResolver(
+		(_, { userInfo }, { ctrs }) => {
+			ctrs.user.createUser(userInfo).then((userCreated) => {
+				pubsub.publish(subscriptionKeys.userAdded, {
+					userAdded: userCreated
+				});
+				return userCreated;
 			});
-			return userCreated;
-		});
-	})
+		}
+	)
 };
 
 module.exports = {
