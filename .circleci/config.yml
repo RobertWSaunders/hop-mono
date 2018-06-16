@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Install NPM Dependencies
-          command: npm install
+          command: npm run bootstrap
       - run:
           name: Run Project Tests
           command: npm test
@@ -18,10 +18,10 @@ jobs:
       - checkout
       - run:
           name: Install NPM Dependencies
-          command: npm install
+          command: npm run bootstrap
       - run:
           name: Build React Client
-          command: npm run client-prod
+          command: npm run build
       - run:
           name: Build Enviroment Variable File
           command: |

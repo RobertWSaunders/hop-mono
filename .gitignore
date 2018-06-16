@@ -2,5 +2,9 @@ node_modules
 .idea
 *.log
 .env
-client/bundle
 .DS_STORE
+.vscode/
+packages/client/bundle/
+packages/email/dist/
+package-lock.json
+lerna-debug.log
